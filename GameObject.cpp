@@ -8,20 +8,40 @@
 
 #include "GameObject.hpp"
 
-GameObject::GameObject(int id, ObjectStateType type)
+GameObject::GameObject(int id, ObjectStateType type, vector<ObjectState *> * states)
 {
     this->id   = id;
     this->type = type;
+    this->states = states;
     
-    states.clear();
+
 }
 
 GameObject::~GameObject()
 {
-    for (auto it = states.begin(); it != states.end(); ++it)
+    if ( states != NULL )
     {
-        delete *it;
+        for (auto it = states->begin(); it != states->end(); ++it)
+        {
+            delete *it;
+        }
+        states->clear();
+        
+        delete states;
     }
-    states.clear();
 }
 
+void GameObject::init()
+{
+    
+}
+
+void GameObject::dispose()
+{
+
+}
+
+void GameObject::draw()
+{
+    
+}

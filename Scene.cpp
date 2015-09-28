@@ -122,3 +122,7 @@ void Scene::close()
     sounds.clear();
 }
 
+void Scene::run()
+{
+    
+}

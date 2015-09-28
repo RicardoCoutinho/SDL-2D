@@ -114,7 +114,6 @@ void SDLApp::run()
     game->init();
     
     // just a poor initialization
-    
     /*
     Text * exampleText = new Text( "asset/font/Treamd.ttf", 30 );
     
@@ -186,8 +185,8 @@ void SDLApp::run()
         SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear( renderer );
         
-        //Apply the image
-        //SDL_RenderCopy( renderer, backgroundTex, NULL, NULL );
+        // Apply the image
+        //  SDL_RenderCopy( renderer, backgroundTex, NULL, NULL );
         //SDL_SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_BLEND );
         
         /*
@@ -205,7 +204,7 @@ void SDLApp::run()
         //spritesheet->draw( renderer, transform );
         
         
-        //Update the surface
+        // Update the surface
         SDL_UpdateWindowSurface( window );
         
         // Update screen

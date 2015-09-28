@@ -32,11 +32,15 @@ class GameObject : public Transform
     int id;
     ObjectStateType type;
     
-    vector<ObjectState *> states;
+    vector<ObjectState *> * states;
     
 public:
-    GameObject(int id, ObjectStateType type);
+    GameObject(int id, ObjectStateType type, vector<ObjectState *> * states);
     ~GameObject();
+    
+    void init();
+    void dispose();
+    void draw();
 };
 
 #endif /* GameObject_hpp */
