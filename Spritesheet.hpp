@@ -60,6 +60,8 @@ public:
     void dispose();
     
     void draw( SDL_Renderer * renderer, Transform * transform );
+    
+    void reset();
 };
 
 #endif /* Spritesheet_hpp */

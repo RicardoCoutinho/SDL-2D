@@ -181,3 +181,8 @@ Int2D Spritesheet::adjustPosition( Transform * transform )
     return position;
 }
 
+void Spritesheet::reset()
+{
+    currentFrame = 0;
+}
+
