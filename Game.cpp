@@ -11,6 +11,8 @@
 Game::Game( SDL_Renderer * renderer )
 {
     this->renderer = renderer;
+    
+    init();
 }
 
 Game::~Game()
@@ -24,6 +26,12 @@ bool Game::init()
 {
     bool success = true;
     
+    scene = new Scene( LEVEL, 0, renderer );
+    
+    if ( scene == NULL )
+    {
+        success = false;
+    }
     
     return success;
 }
@@ -54,6 +62,7 @@ void Game::closeTemp()
 
 void Game::run()
 {
+    scene->run();
 
 }
 

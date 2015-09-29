@@ -34,13 +34,22 @@ bool Text::load()
     dispose();
     
     bool success = true;
+    regex regexp { REGEX_FONT , regex_constants::ECMAScript };
     
-    // Open the Text
-    font = TTF_OpenFont( path.c_str(), size );
-    
-    if ( font == NULL)
+    if ( regex_match( path, regexp ) )
     {
-        printf( "Unable to load font from %s! SDL Error: %s\n", getPath().c_str(), SDL_GetError() );
+        // Open the Text
+        font = TTF_OpenFont( path.c_str(), size );
+        
+        if ( font == NULL)
+        {
+            printf( "Unable to load font from %s! SDL Error: %s\n", getPath().c_str(), SDL_GetError() );
+            success = false;
+        }
+    }
+    else
+    {
+        printf( "Failed to load font from %s! Incompatible format\n", path.c_str() );
         success = false;
     }
     

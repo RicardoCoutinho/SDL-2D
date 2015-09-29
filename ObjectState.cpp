@@ -18,3 +18,8 @@ ObjectState::~ObjectState()
 {
     delete spritesheet;
 }
+
+void ObjectState::draw( SDL_Renderer * renderer, Transform * transform )
+{
+    spritesheet->draw( renderer, transform );
+}

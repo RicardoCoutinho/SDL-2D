@@ -34,7 +34,7 @@ class Game
     // current scene in use
     Scene * scene;
     
-    // temporary scene for scene transitions
+    // temporary scene for transitions between scenes
     Scene * temp;
     
     // Game related variables from scenes/configuration

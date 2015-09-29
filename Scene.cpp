@@ -65,6 +65,15 @@ bool Scene::load( string path )
             success = true;
         }
     }
+    else if ( path.find("/font/") != -1 )
+    {
+        Text * temp = new Text( path );
+        if ( temp != NULL && temp->load())
+        {
+            textures.push_back( temp );
+            success = true;
+        }
+    }
     
     cout << "Loading :: " << ((success) ? "success" : "failed ") << path << " . " << endl;
     

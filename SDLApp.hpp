@@ -39,6 +39,7 @@ public:
     
     SDLApp();
     
+    bool init(const char * title, int posX, int posY, int width, int height, bool fullscreen);
     bool init();
     void close();
     void run();

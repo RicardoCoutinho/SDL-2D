@@ -16,6 +16,7 @@
 // System libraries
 #include <stdio.h>
 #include <string>
+#include <regex>
 
 using namespace std;
 

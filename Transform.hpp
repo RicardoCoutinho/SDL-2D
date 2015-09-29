@@ -30,6 +30,7 @@ protected:
     
 public:
     
+    Transform(Int2D position, Float2D scale, float rotationZ, Alignment alignment);
     Transform();
     ~Transform();
     
@@ -37,6 +38,11 @@ public:
     Float2D getScale();
     float getRotationZ();
     Alignment getAlignment();
+    
+    void setPosition(Int2D position);
+    void setScale(Float2D scale);
+    void setRotationZ(float rotationZ);
+    void setAlignment(Alignment alignment);
 };
 
 #endif /* Transform_hpp */

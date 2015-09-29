@@ -32,29 +32,38 @@ bool Texture::load( SDL_Renderer * renderer )
     dispose();
     
     bool success = true;
+    regex regexp { REGEX_TEXTURE , regex_constants::ECMAScript };
     
-    SDL_Surface * surface = IMG_Load( path.c_str() );
-    
-    if( surface == NULL )
+    if ( regex_match( path, regexp ) )
     {
-        printf( "Unable to load image from %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-    }
-    else
-    {
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_Surface * surface = IMG_Load( path.c_str() );
         
-        if ( texture == NULL)
+        if( surface == NULL )
         {
-            printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-            success = false;
+            printf( "Unable to load image from %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
         }
         else
         {
-            width  = surface->w;
-            height = surface->h;
+            texture = SDL_CreateTextureFromSurface(renderer, surface);
+            
+            if ( texture == NULL)
+            {
+                printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+                success = false;
+            }
+            else
+            {
+                width  = surface->w;
+                height = surface->h;
+            }
+            
+            SDL_FreeSurface( surface );
         }
-        
-        SDL_FreeSurface( surface );
+    }
+    else
+    {
+        printf( "Failed to load texture from %s! Incompatible format\n", path.c_str() );
+        success = false;
     }
     
     return success;

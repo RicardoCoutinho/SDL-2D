@@ -15,9 +15,10 @@ SDLApp::SDLApp()
 }
 
 // Initialize application display variables
-bool SDLApp::init()
+bool SDLApp::init(const char * title, int posX, int posY, int width, int height, bool fullscreen)
 {
     bool success = true;
+    int flags;
     
     // Initialize SDL
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
@@ -34,8 +35,17 @@ bool SDLApp::init()
             success = false;
         }
         
+        if ( fullscreen )
+        {
+            flags = SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN;
+        }
+        else
+        {
+            flags = SDL_WINDOW_SHOWN;
+        }
+        
         // Create window
-        window = SDL_CreateWindow( "GemsArr", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        window = SDL_CreateWindow( title, posX, posY, width, height, flags );
         
         if( window == NULL )
         {
@@ -88,6 +98,12 @@ bool SDLApp::init()
     return success;
 }
 
+// Initialize application display variables
+bool SDLApp::init()
+{
+    return init( "SDL App Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, false );
+}
+
 // Close and delete every allocated asset
 void SDLApp::close()
 {
@@ -111,21 +127,16 @@ void SDLApp::close()
 void SDLApp::run()
 {
     
-    game->init();
-    
     // just a poor initialization
-    /*
+    
     Text * exampleText = new Text( "asset/font/Treamd.ttf", 30 );
     
-    Texture * texture = new Texture( "asset/spritesheet/foo.png" );
+    Texture * texture = new Texture( "asset/texture/foo.png" );
     texture->load( renderer );
-    
+
     Spritesheet * spritesheet = new Spritesheet( texture, 4, 64, 205, {0,0xFF,0xFF,1} );
     
-    Transform * transform = new Transform();
-    
-    */
-    
+    Transform * transform = new Transform( {250,250}, {1.0,1.0}, 0.0, CENTER_CENTER );
     
     bool
         quit = false, //Main loop flag
@@ -167,6 +178,7 @@ void SDLApp::run()
                     keyDown = true;
                     break;
                 case SDL_KEYUP:
+                    if ( e.key.keysym.scancode == SDL_SCANCODE_ESCAPE ) { quit = true; }
                     keyDown = false;
                     break;
                 default:
@@ -199,9 +211,9 @@ void SDLApp::run()
          
          */
         
-        //exampleText->draw( renderer, { 250, 50 }, { 0x00, 0x00, 0x00, 0xFF }, "example text" );
+        exampleText->draw( renderer, { 250, 50 }, { 0x00, 0x00, 0x00, 0xFF }, "example text" );
         
-        //spritesheet->draw( renderer, transform );
+        spritesheet->draw( renderer, transform );
         
         
         // Update the surface

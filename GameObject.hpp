@@ -24,23 +24,25 @@
 #include "Transform.hpp"
 #include "ObjectState.hpp"
 #include "Sound.hpp"
+#include "Text.hpp"
 
 using namespace std;
 
-class GameObject : public Transform
+class GameObject
 {
     int id;
     ObjectStateType type;
+    Transform * transform;
     
     vector<ObjectState *> * states;
     
 public:
-    GameObject(int id, ObjectStateType type, vector<ObjectState *> * states);
+    GameObject(int id, ObjectStateType type, Transform * transform, vector<ObjectState *> * states);
     ~GameObject();
     
     void init();
     void dispose();
-    void draw();
+    void draw( SDL_Renderer * renderer, Transform * transform );
 };
 
 #endif /* GameObject_hpp */

@@ -8,6 +8,14 @@
 
 #include "Transform.hpp"
 
+Transform::Transform(Int2D position, Float2D scale, float rotationZ, Alignment alignment)
+{
+    setPosition(position);
+    setScale(scale);
+    setRotationZ(rotationZ);
+    setAlignment(alignment);
+}
+
 Transform::Transform()
 {
     position  = { 0, 0 };
@@ -40,3 +48,27 @@ Alignment Transform::getAlignment()
 {
     return alignment;
 }
+
+void Transform::setPosition(Int2D position)
+{
+    this->position.x = position.x;
+    this->position.y = position.y;
+}
+
+void Transform::setScale(Float2D scale)
+{
+    this->scale.x = scale.x;
+    this->scale.y = scale.y;
+}
+
+void Transform::setRotationZ(float rotationZ)
+{
+    this->rotationZ = rotationZ;
+}
+
+void Transform::setAlignment(Alignment alignment)
+{
+    this->alignment = alignment;
+}
+
+

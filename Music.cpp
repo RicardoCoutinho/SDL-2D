@@ -25,12 +25,21 @@ bool Music::load()
     dispose();
     
     bool success = true;
+    regex regexp { REGEX_MUSIC , regex_constants::ECMAScript };
     
-    music = Mix_LoadMUS( path.c_str() );
-    
-    if( music == NULL )
+    if ( regex_match( path, regexp ) )
     {
-        printf( "Failed to load music from %s! SDL_mixer Error: %s\n", path.c_str(), Mix_GetError() );
+        music = Mix_LoadMUS( path.c_str() );
+        
+        if( music == NULL )
+        {
+            printf( "Failed to load music from %s! SDL_mixer Error: %s\n", path.c_str(), Mix_GetError() );
+            success = false;
+        }
+    }
+    else
+    {
+        printf( "Failed to load music from %s! Incompatible format\n", path.c_str() );
         success = false;
     }
     

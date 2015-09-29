@@ -35,7 +35,7 @@ public:
     ObjectState( ObjectStateType state, Spritesheet * spritesheet );
     ~ObjectState();
     
-    
+    void draw( SDL_Renderer * renderer, Transform * transform );
 };
 
 #endif /* ObjectState_hpp */

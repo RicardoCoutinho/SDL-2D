@@ -8,17 +8,35 @@
 
 #include "GameObject.hpp"
 
-GameObject::GameObject(int id, ObjectStateType type, vector<ObjectState *> * states)
+GameObject::GameObject(int id, ObjectStateType type, Transform * transform, vector<ObjectState *> * states)
 {
     this->id   = id;
     this->type = type;
+    this->transform = transform;
     this->states = states;
-    
-
 }
 
 GameObject::~GameObject()
 {
+    this->id   = 0;
+    this->type = IDLE;
+    
+    dispose();
+}
+
+void GameObject::init()
+{
+    
+}
+
+void GameObject::dispose()
+{
+    if ( transform != NULL )
+    {
+        delete transform;
+    }
+    transform = NULL;
+    
     if ( states != NULL )
     {
         for (auto it = states->begin(); it != states->end(); ++it)
@@ -29,19 +47,10 @@ GameObject::~GameObject()
         
         delete states;
     }
+    states = NULL;
 }
 
-void GameObject::init()
+void GameObject::draw( SDL_Renderer * renderer, Transform * transform )
 {
-    
-}
-
-void GameObject::dispose()
-{
-
-}
-
-void GameObject::draw()
-{
-    
+    states->at( type )->draw( renderer, transform );
 }

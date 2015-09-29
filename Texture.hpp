@@ -16,6 +16,7 @@
 // System libraries
 #include <stdio.h>
 #include <string>
+#include <regex>
 
 // Custom libraries
 #include "Types.hpp"
