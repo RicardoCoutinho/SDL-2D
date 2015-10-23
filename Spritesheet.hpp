@@ -28,10 +28,13 @@ using namespace std;
 class Spritesheet
 {
     const int FRAMES_PER_SECOND = 30; // this needs to be a variable passed by argument in the constructor, like speed or sampleSpeed
-    int totalFrames;
+    //int totalFrames;
     
-    int frames;
+    int nFrames;
     int currentFrame;
+    
+    int start;
+    int end;
     
     int clipWidth;
     int clipHeight;
@@ -52,7 +55,7 @@ protected:
     
 public:
     
-    Spritesheet( Texture * texture, int frames, int clipWidth, int clipHeight, SDL_Color colorKey );
+    Spritesheet( Texture * texture, int nFrames, int clipWidth, int clipHeight, SDL_Color colorKey );
     ~Spritesheet();
     
     bool load( Texture * texture );

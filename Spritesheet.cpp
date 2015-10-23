@@ -8,12 +8,13 @@
 
 #include "Spritesheet.hpp"
 
-Spritesheet::Spritesheet( Texture * texture, int frames, int clipWidth, int clipHeight, SDL_Color colorKey )
+Spritesheet::Spritesheet( Texture * texture, int nFrames, int clipWidth, int clipHeight, SDL_Color colorKey )
 {
-    this->totalFrames = 0;
-    
-    this->frames       = frames;
+    this->nFrames  = nFrames;
     this->currentFrame = 0;
+    
+    this->start = 0;
+    this->end   = nFrames;
     
     this->clipWidth    = clipWidth;
     this->clipHeight   = clipHeight;
@@ -31,9 +32,10 @@ Spritesheet::Spritesheet( Texture * texture, int frames, int clipWidth, int clip
 
 Spritesheet::~Spritesheet()
 {
-    totalFrames  = 0;
-    frames       = 0;
+    nFrames      = 0;
     currentFrame = 0;
+    start        = 0;
+    end          = 0;
     clipWidth    = 0;
     clipHeight   = 0;
     loop         = true;
@@ -58,11 +60,11 @@ bool Spritesheet::load( Texture * texture )
     {
         this->texture = texture;
         
-        if ( frames > 0 )
+        if ( nFrames > 0 )
         {
-            for (int y=0, iFrame=0; y<texture->getHeight() && iFrame<frames; y+=clipHeight)
+            for (int y=0, iFrame=0; y<texture->getHeight() && iFrame<nFrames; y+=clipHeight)
             {
-                for (int x=0; x<=texture->getWidth() && iFrame<frames; x+=clipWidth, iFrame++)
+                for (int x=0; x<=texture->getWidth() && iFrame<end; x+=clipWidth, iFrame++)
                 {
                     SDL_Rect * rect = new SDL_Rect();
                     rect->x = x;
@@ -110,18 +112,15 @@ void Spritesheet::draw( SDL_Renderer * renderer, Transform * transform )
 
 void Spritesheet::nextFrame()
 {
-    currentFrame = totalFrames / frames;
-    
-    if ( loop && frames>1 )
+    if ( loop && nFrames>1 )
     {
-        if ( currentFrame >= frames )
+        if ( currentFrame + 1 >= end )
         {
-            currentFrame = 0;
-            totalFrames  = 0;
+            currentFrame = start;
         }
         else
         {
-            totalFrames++;
+            currentFrame++;
         }
     }
 }
@@ -183,6 +182,6 @@ Int2D Spritesheet::adjustPosition( Transform * transform )
 
 void Spritesheet::reset()
 {
-    currentFrame = 0;
+    currentFrame = start;
 }
 
